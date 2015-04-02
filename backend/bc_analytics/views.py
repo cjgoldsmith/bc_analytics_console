@@ -1,15 +1,11 @@
 from models import BCCredentials, BCAccounts
-from .util import make_bc_call,request_url_prefix
+from .util import make_bc_call,request_url_prefix, get_last_month
 from serializers import BCCredentialSerializer, BCAccountSerializer, UserSerializer
 from rest_framework import viewsets
-from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
 
 from django.views.generic import View
 from django.contrib.auth.models import User
-from django.utils.six import BytesIO
-
-from sanction import Client
 
 class BCCredentialViewSet(viewsets.ModelViewSet):
     queryset = BCCredentials.objects.all()
@@ -24,16 +20,34 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
 class ReportTotals(View):
-
+    '''
+    Shows totals for the previous month.
+    '''
     def get(self, request):
 
+        results = {
+            'accounts': {},
+            'totals': {},
+        }
+
+        total_views = 0
+        total_impressions = 0
+        start, finish = get_last_month()
+        results['accounts'] = {}
+        results['totals'] = {}
         for a in BCAccounts.objects.all():
             url = request_url_prefix(a.pub_id)
-            url += '?'
-        content = "{}"
-        stream = BytesIO(content)
-        data = JSONParser().parse(stream)
-        return JsonResponse(data)
+            url += "report/?dimensions=account&from={0}&to={1}&offset=0&fields=all&sort=engagement_score&format=json".format(start, finish)
+            content = make_bc_call(url)
+            results['accounts'][a.name] = content['summary']
+            results['accounts'][a.name]['name'] = a.name
+            total_views += content['summary']['video_view']
+            total_impressions += content['summary']['video_impression']
+        results['totals']['video_view'] = total_views
+        results['totals']['video_impressions'] = total_impressions
+        results['range'] = (start, finish)
+
+        return JsonResponse(results)
 
 
 

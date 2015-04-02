@@ -1,16 +1,34 @@
 <h1>Report - Account Totals</h1>
+<span ng-show="data">For {{data.range[0]}} to {{data.range[1]}}</span>
 <table class="table">
     <tr>
         <th>Account</th>
-        <th>Total</th>
+        <th>Impressions</th>
+        <th>Views</th>
+        <th>Play Rate</th>
+        <th>Engagement Score</th>
+        <th>Player Load</th>
     </tr>
-    <tr ng-repeat="t in totals">
+    <tr ng-repeat="t in data.accounts">
         <td>{{t.name}}</td>
-        <td>{{t.total}}</td>
+        <td>{{t.video_impression}}</td>
+        <td>{{t.video_view}}</td>
+        <td>{{t.play_rate}}</td>
+        <td>{{t.engagement_score}}</td>
+        <td>{{t.player_load}}</td>
     </tr>
 </table>
 
 <div class="well">
-    <h2>Grand Total</h2>
-    {{grand_total}}
+    <h2>Grand Totals</h2>
+    <table class="table">
+        <tr>
+            <th>Impressions</th>
+            <th>Views</th>
+        </tr>
+        <tr>
+            <td>{{data.totals.video_impressions}}</td>
+            <td>{{data.totals.video_view}}</td>
+        </tr>
+    </table>
 </div>

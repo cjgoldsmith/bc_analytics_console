@@ -1,13 +1,15 @@
 from .models import BCCredentials
 from sanction import Client
 
+import datetime
+
 def request_url_prefix(account):
     '''
     Builds prefix to brightcove api calls
     :param account: numeric account id
     :return: url string
     '''
-    return '/analytics-api/videocloud/accounts/{1}/report/'.format(account)
+    return '/analytics-api/videocloud/accounts/{0}/'.format(account)
 
 def make_bc_call(request_url):
     '''
@@ -26,8 +28,15 @@ def make_bc_call(request_url):
                 client_id = credential.client_id,
                 client_secret = credential.client_secret, )
             client.request_token(grant_type='client_credentials')
-            continue
+            break
         except Exception:
             pass
 
-    client.request(request_url)
+    return client.request(request_url)
+
+def get_last_month():
+
+    today = datetime.date.today()
+    first = datetime.date(day=1, month=today.month, year=today.year)
+    lastMonth = first - datetime.timedelta(days=1)
+    return (lastMonth.strftime('%Y-%m-') + '01', lastMonth.strftime('%Y-%m-%d'))

@@ -16,7 +16,7 @@ angular.module('webappApp')
         url: '/data/reports/totals/',
         cache: false
       }).success( function(data) {
-        $scope.totals = data;
+        $scope.data = data;
       });
     };
     $scope.get_all();
