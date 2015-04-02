@@ -1,0 +1,16 @@
+<h1>Report - Account Totals</h1>
+<table class="table">
+    <tr>
+        <th>Account</th>
+        <th>Total</th>
+    </tr>
+    <tr ng-repeat="t in totals">
+        <td>{{t.name}}</td>
+        <td>{{t.total}}</td>
+    </tr>
+</table>
+
+<div class="well">
+    <h2>Grand Total</h2>
+    {{grand_total}}
+</div>

@@ -1,0 +1,93 @@
+<div>
+    <h2>Credentials</h2>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Client ID</th>
+            <th>Client Secret</th>
+        </tr>
+        <tr ng-repeat='c in credentials'>
+            <td>{{c.name}}</td>
+            <td>{{c.client_id}}</td>
+            <td>{{c.client_secret}}</td>
+        </tr>
+    </table>
+
+    <h3>Add New Credentials</h3>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Name</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="name" type="text" ng-model="credential.name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="client_id">Client ID</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="client_id" type="text" ng-model="credential.client_id" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="client_secret">Client Secret</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="client_secret" type="text" ng-model="credential.client_secret" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <input class="btn btn-primary" type="submit" ng-click="add_credentials(credential)" value="Add" />
+            </div>
+        </div>
+    </form>
+
+    <h2>Accounts</h2>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Pub ID</th>
+            <th>Auth</th>
+            <th>Token</th>
+        </tr>
+        <tr ng-repeat='a in accounts'>
+            <td>{{a.name}}</td>
+            <td>{{a.pub_id}}</td>
+            <td>{{a.auth}}</td>
+            <td>{{a.token}}</td>
+        </tr>
+    </table>
+
+    <h3>Add New Accounts</h3>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Name</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="name" type="text" ng-model="account.name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pub_id">Pub ID</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="pub_id" type="text" ng-model="account.pub_id" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="auth">Auth</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="auth" type="text" ng-model="account.auth" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="token">Token</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="token" type="text" ng-model="account.token" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <input class="btn btn-primary" type="submit" ng-click="add_accounts()" value="Add" />
+            </div>
+        </div>
+    </form>
+</div>
