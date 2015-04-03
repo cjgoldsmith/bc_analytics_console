@@ -24,6 +24,7 @@ def make_bc_call(request_url):
     resource_base = "https://data.brightcove.com/"
 
     for credential in BCCredentials.objects.all():
+        content = None
         try:
             client = Client(
                 token_endpoint=token_request_url,
@@ -31,11 +32,12 @@ def make_bc_call(request_url):
                 client_id=credential.client_id,
                 client_secret=credential.client_secret, )
             client.request_token(grant_type='client_credentials')
+            content = client.request(request_url)
             break
         except Exception as e:
             pass
 
-    return client.request(request_url)
+        return content
 
 
 def get_last_month():

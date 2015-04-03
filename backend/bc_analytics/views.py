@@ -53,7 +53,7 @@ class ReportTotals(View):
             total_impressions += content['summary']['video_impression']
 
         results['totals']['video_view'] = total_views
-        results['totals']['video_impressions'] = total_impressions
+        results['totals']['video_impression'] = total_impressions
         results['range'] = (start, finish)
 
         return JsonResponse(results)
