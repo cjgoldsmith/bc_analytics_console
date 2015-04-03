@@ -10,7 +10,7 @@
 angular.module('webappApp')
   .controller('BCReportAllCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.get_all = function() {
+    $scope.getAll = function() {
       $http({
         method: 'GET',
         url: '/data/reports/totals/',
@@ -19,5 +19,5 @@ angular.module('webappApp')
         $scope.data = data;
       });
     };
-    $scope.get_all();
+    $scope.getAll();
   }]);

@@ -10,7 +10,7 @@
 angular.module('webappApp')
   .controller('BCCredentialCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.get_credentials = function() {
+    $scope.getCredentials = function() {
         $http({
           method: 'GET',
           url: '/data/bccredentials/',
@@ -19,21 +19,21 @@ angular.module('webappApp')
           $scope.credentials = data;
         });
     };
-    $scope.get_credentials();
+    $scope.getCredentials();
 
-    $scope.add_credentials = function() {
+    $scope.addCredentials = function() {
       $http({
         method: 'POST',
         url: '/data/bccredentials/',
         cache: false,
         data: $scope.credential
-      }).success( function(data) {
+      }).success( function() {
         $scope.credential = {};
-        $scope.get_credentials();
+        $scope.getCredentials();
       });
     };
 
-    $scope.get_accounts = function() {
+    $scope.getAccounts = function() {
       $http({
         method: 'GET',
         url: '/data/bcaccounts/',
@@ -42,18 +42,17 @@ angular.module('webappApp')
         $scope.accounts = data;
       });
     };
-    $scope.get_accounts();
+    $scope.getAccounts();
 
-    $scope.add_accounts = function() {
+    $scope.addAccounts = function() {
       $http({
         method: 'POST',
         url: '/data/bcaccounts/',
         cache: false,
         data: $scope.account
-      }).success( function(data) {
+      }).success( function() {
         $scope.account = {};
-        $scope.get_accounts();
-      })
+        $scope.getAccounts();
+      });
     };
-
-  }])
+  }]);

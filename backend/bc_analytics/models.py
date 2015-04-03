@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class BCCredentials(models.Model):
     name = models.CharField(
         max_length=255,
@@ -11,6 +11,7 @@ class BCCredentials(models.Model):
 
     class Meta:
         ordering = ('name', )
+
 
 class BCAccounts(models.Model):
     name = models.CharField(
@@ -23,4 +24,3 @@ class BCAccounts(models.Model):
 
     class Meta:
         ordering = ('name', )
-
